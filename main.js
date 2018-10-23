@@ -47,14 +47,12 @@ axios.get( base_url + "tweets")
     
       //tweet-media section
       const imgs = [];
-      if (tweetData.entities["media"] != undefined) {
-        for (let i = 0; i < 1; i++) {
+      if (tweetData.entities["media"] != undefined && tweetData.entities["media"].length > 0) {
           tweetData.entities["media"].forEach(tweetImg => {
             let img = document.createElement("img");
             img.src = tweetImg.media_url_https;
             imgs.push(img);
           });
-        }
       }
       if (imgs.length > 0) {
         let tweetWidth = 250;

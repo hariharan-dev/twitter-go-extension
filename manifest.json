@@ -1,0 +1,9 @@
+{
+  "manifest_version": 2,
+  "name": "Twitter go", 
+  "version": "1.0",
+  "description": "A chrome extension that displays latest 20 tweets from my twitter timeline whenever I open a new tab.",
+  "chrome_url_overrides" : {
+    "newtab": "index.html"
+  }
+}

@@ -88,7 +88,7 @@ body{
     border-radius: 2%;
     text-align: center;
     padding: 1%;
-    padding-bottom: 2%;
+    padding-bottom: 1%;
     display: block;
     max-height: 65vh;
     font-size: 1.3rem;
@@ -108,7 +108,7 @@ body{
 
 .tweet .header {
     padding-bottom: 4%;
-    max-height: 10%;
+    max-height: 15%;
     border-bottom: 1px solid #4a4545;
     font-size: 0.8em;
     overflow: hidden;

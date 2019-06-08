@@ -1,6 +1,5 @@
 import axios from "axios";
 import { base_url } from './constants';
-import { data } from "./input.js";
 
 axios.get( base_url + "tweets")
 .then(
@@ -18,33 +17,21 @@ axios.get( base_url + "tweets")
       const tweet = document.createElement("div");
       tweet.className = "tweet";
       tweet.id = tweetData.id;
-    
+
       // tweet-header section
-      const header = document.createElement("div");
-      header.className = "header";
-      const userDp = document.createElement("img");
-      userDp.src = tweetData.user.profile_image_url_https;
-      userDp.className = "dp";
-      const userTitle = document.createElement("h4");
-      const userTitleText = document.createTextNode(
-        tweetData.user.name + " @" + tweetData.user.screen_name
-      );
-      userTitle.appendChild(userTitleText);
-      header.appendChild(userDp);
-      header.appendChild(userTitle);
-    
+      const header = "<div class='header'>" +
+      "<img class='dp' src=" + tweetData.user.profile_image_url_https + ">" +
+      "<h4>" + tweetData.user.name + " @" + tweetData.user.screen_name + "</h4>" +
+      "</div>";
+
       // tweet-content section
-      const tweetContent = document.createElement("div");
-      tweetContent.className = "tweet-content";
-      const tweetTextContent = document.createElement("p");
-      const tweetTextNode = document.createTextNode(tweetData.text);
-      tweetTextContent.appendChild(tweetTextNode);
-      tweetContent.appendChild(tweetTextContent);
-    
+      const tweetContent = "<div class='tweet-content'>" +
+      "<p>" + tweetData.text + "</p>" +
+      "</div>";
+
       //appending header and tweet content to tweet
-      tweet.appendChild(header);
-      tweet.appendChild(tweetContent);
-    
+      tweet.innerHTML = header + tweetContent;
+
       //tweet-media section
       const imgs = [];
       if (tweetData.entities["media"] != undefined && tweetData.entities["media"].length > 0) {
@@ -65,16 +52,14 @@ axios.get( base_url + "tweets")
         imgs.forEach(img => imagesSection.appendChild(img));
         tweet.appendChild(imagesSection);
       }
-    
+
       // when on clicked the tweet will be opened in a blank tab
       tweet.addEventListener("click", event => {
         let url = "https://twitter.com/";
-        url += tweetData.user.screen_name;
-        url += "/status/";
-        url += tweetData.id_str;
+        url += tweetData.user.screen_name + "/status/" + tweetData.id_str;
         window.open(url, "_blank");
       });
-    
+
       //appending the tweet finally
       document.getElementsByClassName("tweets-container")[0].appendChild(tweet);
     });

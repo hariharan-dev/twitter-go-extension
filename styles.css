@@ -115,7 +115,7 @@ body{
 }
 .tweet .header .dp {
     margin: 0 auto;
-    height: 40%;
+    /* height: 40%; */
 }
 .tweet .header h4 {
     padding-top: 5px;

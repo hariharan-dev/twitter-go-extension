@@ -1,6 +1,6 @@
 import axios from "axios";
 import { base_url } from "./constants";
-// import { data } from "./input";
+import { data } from "./input";
 
 main();
 
@@ -12,8 +12,7 @@ function main() {
         console.log("error");
         return;
       }
-      const data = tweets.data;
-      appendTweets(data);
+      appendTweets(tweets.data);
       var loader = document.getElementsByClassName("loader")[0];
       loader.parentNode.removeChild(loader);
       document
@@ -34,35 +33,23 @@ function main() {
  */
 function appendTweets(tweets) {
   tweets.forEach(tweetData => {
-    const tweet = document.createElement("div");
-    tweet.className = "tweet";
-    tweet.id = tweetData.id;
+    const tweetTemplate = tweetTemp.content.cloneNode(true);
+    tweetTemplate.id = tweetData.id;
+    const tweet = tweetTemplate.querySelector('.tweet');
+    tweet.href = `https://twitter.com/${tweetData.user.screen_name}/status/${tweetData.id_str}`;
 
     // tweet-header section
-    const header =
-      "<div class='header'>" +
-      "<img class='dp' src=" +
-      tweetData.user.profile_image_url_https +
-      ">" +
-      "<h4>" +
-      tweetData.user.name +
-      " @" +
-      tweetData.user.screen_name +
-      "</h4>" +
-      "</div>";
+    let headerImg = tweet.querySelector("img");
+    headerImg.src = tweetData.user.profile_image_url_https;
+    let userDetails = tweet.querySelector("h4");
+    userDetails.innerHTML =
+      tweetData.user.name + " @" + tweetData.user.screen_name;
 
     // tweet-content section
-    const tweetContent =
-      "<div class='tweet-content'>" +
-      "<p>" +
-      tweetData.text +
-      "</p>" +
-      "</div>";
+    let tweetContent = tweet.querySelector("p");
+    tweetContent.innerHTML = tweetData.text;
 
-    //appending header and tweet content to tweet
-    tweet.innerHTML = header + tweetContent;
-
-    //tweet-media section
+    //TO-DO clean up with css heights and width tweet-media section
     const imgs = [];
     if (tweetData.entities["media"] && tweetData.entities["media"].length) {
       tweetData.entities["media"].forEach(tweetImg => {
@@ -77,21 +64,12 @@ function appendTweets(tweets) {
         imgs[i].width = tweetWidth / imgs.length;
         imgs[i].height = tweetWidth / imgs.length;
       }
-      const imagesSection = document.createElement("div");
-      imagesSection.className = "images";
+      const imagesSection = tweet.querySelector(".images");
       imgs.forEach(img => imagesSection.appendChild(img));
-      tweet.appendChild(imagesSection);
     }
 
-    // when on clicked the tweet will be opened in a blank tab
-    tweet.addEventListener("click", event => {
-      let url = "https://twitter.com/";
-      url += tweetData.user.screen_name + "/status/" + tweetData.id_str;
-      window.open(url, "_blank");
-    });
-
     //appending the tweet finally
-    document.getElementsByClassName("tweets-container")[0].appendChild(tweet);
+    document.getElementsByClassName("tweets-container")[0].appendChild(tweetTemplate);
   });
 }
 

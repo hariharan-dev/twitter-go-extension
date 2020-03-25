@@ -95,6 +95,7 @@ body{
     box-shadow: 1px 0px #4a4545;
     border: 1px solid #4a4545;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .tweet:hover {

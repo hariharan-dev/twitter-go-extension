@@ -1,19 +1,31 @@
 <html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<head>
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
+  <body>
     <div class="carousel">
-        <div class="title">Twitter Go</div>
-        <div id="scroll-left" class="left-arrow"> < </div>
-        <div class="tweets-container">
-            <div class="loader"></div>
-        </div>
-        <div id="scroll-right" class="right-arrow"> > </div>
+      <div class="title">Twitter Go</div>
+      <div id="scroll-left" class="left-arrow"><</div>
+      <div class="tweets-container">
+        <div class="loader"></div>
+      </div>
+      <div id="scroll-right" class="right-arrow">></div>
     </div>
+    <!-- Tweet template -->
+    <template id="tweetTemp">
+      <a class="tweet" rel="noopener" target="_blank">
+        <div class="header">
+          <img class="dp" src="" />
+          <h4 id="name">idname @id</h4>
+        </div>
+        <div class="tweet-content">
+          <p></p>
+        </div>
+        <div class="images"></div>
+      </a>
+    </template>
+    <!-- TODO - should point main.js to dist/main.js for dev  -->
     <script type="text/javascript" src="main.js"></script>
-</body>
-
+  </body>
 </html>

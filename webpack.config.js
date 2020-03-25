@@ -1,5 +1,4 @@
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 // webpack.config.js
 module.exports = {
@@ -23,23 +22,24 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: [
-          'raw-loader'
-        ]
+        loaders: ["raw-loader"]
       },
       {
         test: /\.(html)$/,
         use: {
-          loader: 'html-loader',
+          loader: "html-loader"
         }
       }
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([
-      {from: './styles.css', to: 'styles.css', toType: 'file'},
-      {from: './index.html', to: 'index.html', toType: 'file'}
-    ], {})
+    new CopyWebpackPlugin(
+      [
+        { from: "./styles.css", to: "styles.css", toType: "file" },
+        { from: "./index.html", to: "index.html", toType: "file" }
+      ],
+      {}
+    )
   ],
   node: {
     fs: "empty",

@@ -40,7 +40,7 @@ body{
 .carousel .tweets-container {
     display: flex;
     justify-content: flex-start;
-    width: 85%;
+    width: 100%;
     overflow-x: scroll;
     overflow-y: hidden;
     height: 85vh;
@@ -71,7 +71,6 @@ body{
     border-radius: 50%;
     margin: 0 auto;
     animation: 3s spin infinite;
-
 }
 
 @keyframes spin {
@@ -81,10 +80,11 @@ body{
 }
 
 .tweet {
-    max-width: 30vw;
+    max-width: 16.5%;
+    min-width: 16.5%;
     background: #312d2d;
     color: white;
-    margin: 0.5%;
+    margin: 0 0.5%;
     border-radius: 2%;
     text-align: center;
     padding: 1%;
@@ -142,6 +142,8 @@ body{
 
 .tweet .images img {
     margin-bottom: 10px;
+    max-width: 100%;
+    min-width: 25%;
 }
 
 

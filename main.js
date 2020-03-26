@@ -35,41 +35,30 @@ function appendTweets(tweets) {
   tweets.forEach(tweetData => {
     const tweetTemplate = tweetTemp.content.cloneNode(true);
     tweetTemplate.id = tweetData.id;
-    const tweet = tweetTemplate.querySelector('.tweet');
+    const tweet = tweetTemplate.querySelector(".tweet");
     tweet.href = `https://twitter.com/${tweetData.user.screen_name}/status/${tweetData.id_str}`;
 
     // tweet-header section
     let headerImg = tweet.querySelector("img");
     headerImg.src = tweetData.user.profile_image_url_https;
     let userDetails = tweet.querySelector("h4");
-    userDetails.innerHTML =
-      tweetData.user.name + " @" + tweetData.user.screen_name;
+    userDetails.innerHTML = `${tweetData.user.name} @${tweetData.user.screen_name}`;
 
     // tweet-content section
     let tweetContent = tweet.querySelector("p");
     tweetContent.innerHTML = tweetData.text;
 
-    //TO-DO clean up with css heights and width tweet-media section
-    const imgs = [];
     if (tweetData.entities["media"] && tweetData.entities["media"].length) {
-      tweetData.entities["media"].forEach(tweetImg => {
-        let img = document.createElement("img");
-        img.src = tweetImg.media_url_https;
-        imgs.push(img);
-      });
-    }
-    if (imgs.length > 0) {
-      let tweetWidth = 250;
-      for (let i = 0; i < imgs.length; i++) {
-        imgs[i].width = tweetWidth / imgs.length;
-        imgs[i].height = tweetWidth / imgs.length;
-      }
+      let img = document.createElement("img");
+      img.src = tweetData.entities["media"][0].media_url_https;
+      img.height = 250;
       const imagesSection = tweet.querySelector(".images");
-      imgs.forEach(img => imagesSection.appendChild(img));
+      imagesSection.appendChild(img);
     }
-
     //appending the tweet finally
-    document.getElementsByClassName("tweets-container")[0].appendChild(tweetTemplate);
+    document
+      .getElementsByClassName("tweets-container")[0]
+      .appendChild(tweetTemplate);
   });
 }
 
